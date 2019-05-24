@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView5" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_gift_example"
+                android:id="@+id/giftImg"
+                android:background="@color/transparent"
+                android:layout_width="128dp"
+                android:layout_height="128dp" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_anonymous_gift_checkbox"
+                android:id="@+id/giftAnonymous"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:text=""
+                android:hint="@string/label_gift_message_placeholder"
+                android:ems="10"
+                android:id="@+id/giftMessage" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
