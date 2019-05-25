@@ -8,14 +8,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -93,7 +96,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle(mTitle);
+        /*getSupportActionBar().*/setTitle(mTitle);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -214,12 +217,60 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
         }
     }
 
+    private MenuItem stream_menu = null;
+    private MenuItem photo_menu = null;
+    private MenuItem video_menu = null;
+
+    private void setVisibleMenu(Boolean v){
+        if(stream_menu != null) stream_menu.setVisible(v);
+        if(photo_menu != null) photo_menu.setVisible(v);
+        if(video_menu != null) video_menu.setVisible(v);
+
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            TextView toolbarTitle = null;
+            for (int i = 0; i < toolbar.getChildCount(); ++i) {
+                View child = toolbar.getChildAt(i);
+
+                // assuming that the title is the first instance of TextView
+                // you can also check if the title string matches
+                if (child instanceof TextView) {
+                    toolbarTitle = (TextView)child;
+                    break;
+                }
+            }
+            Context context = this;
+            if(toolbarTitle != null){
+                if(v) toolbarTitle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.v("AAA","------- ****** ------");
+                        PopupMenu popup = new PopupMenu(context, v);
+                        popup.inflate(R.menu.menu_stream);
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                onPopupMenuClick(item);
+                                return false;
+                            }
+                        });
+                        popup.show();
+                    }
+                });
+                else toolbarTitle.setOnClickListener(null);
+
+            }
+    }
+
+    private void setTitleMenu(int textId){
+        if(stream_menu != null) stream_menu.setTitle(textId);
+    }
+
     private void displayFragment(int id, String title) {
 
         action = false;
 
         switch (id) {
-
+//стена
             case R.id.nav_feed: {
 
                 page = PAGE_NEWS;
@@ -229,12 +280,13 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 fragment = new NewsFragment();
 
                 action = true;
-
+                setVisibleMenu(true);
+                //setTitleMenu(R.string.nav_feed);
                 break;
             }
 
             case R.id.nav_stream: {
-
+//лента
                 page = PAGE_STREAM;
 
                 mNavView.setCheckedItem(R.id.nav_stream);
@@ -242,6 +294,10 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 fragment = new StreamFragment();
 
                 action = true;
+
+                //menu visible
+                setVisibleMenu(true);
+                //setTitleMenu(R.string.nav_stream);
 
                 break;
             }
@@ -255,7 +311,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 fragment = new SearchFragment();
 
                 action = true;
-
+                setVisibleMenu(false);
                 break;
             }
 
@@ -268,7 +324,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 fragment = new NearbyFragment();
 
                 action = true;
-
+                setVisibleMenu(false);
                 break;
             }
 
@@ -279,7 +335,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_friends);
 
                 fragment = new FriendsFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -292,7 +348,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_guests);
 
                 fragment = new GuestsFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -305,7 +361,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_favorites);
 
                 fragment = new FavoritesFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -318,7 +374,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_notifications);
 
                 fragment = new NotificationsFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -331,7 +387,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_messages);
 
                 fragment = new DialogsFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -344,7 +400,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 mNavView.setCheckedItem(R.id.nav_profile);
 
                 fragment = new ProfileFragment();
-
+                setVisibleMenu(false);
                 action = true;
 
                 break;
@@ -354,7 +410,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
                 Intent i = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(i);
-
+                setVisibleMenu(false);
                 break;
             }
         }
@@ -363,7 +419,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
             getSupportActionBar().setDisplayShowCustomEnabled(false);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
-            getSupportActionBar().setTitle(title);
+            /*getSupportActionBar().*/setTitle(title);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.container_body, fragment).commit();
@@ -654,10 +710,20 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_stream, menu);
 
+        stream_menu = menu.findItem(R.id.stream);
+        photo_menu = menu.findItem(R.id.photo);
+        video_menu = menu.findItem(R.id.video);
         return super.onCreateOptionsMenu(menu);
+    }*/
+
+    public void onPopupMenuClick(MenuItem item){
+        if(fragment == null) return;
+        if(fragment instanceof IMenuItemSelect) ((IMenuItemSelect) fragment).onClickMenuItem(item);
     }
 
     @Override
@@ -681,6 +747,12 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
     @Override
     public void setTitle(CharSequence title) {
+
+        String t = title.toString();
+        if(t.equals("Лента")) t += " \u25bd";
+        if(t.equals("Стена")) t += " \u25bd";
+
+        title = t;
 
         mTitle = title;
         getSupportActionBar().setTitle(mTitle);

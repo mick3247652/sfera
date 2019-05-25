@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -40,7 +41,10 @@ import ru.club.sfera.model.Item;
 import ru.club.sfera.util.Api;
 import ru.club.sfera.util.CustomRequest;
 
-public class NewsFragment extends FragmentBase implements Constants, SwipeRefreshLayout.OnRefreshListener {
+public class NewsFragment extends FragmentBase implements Constants, SwipeRefreshLayout.OnRefreshListener, IMenuItemSelect {
+    private boolean isShowPhoto = true;
+    private boolean isShowText = true;
+    private boolean isShowVideo = true;
 
     private static final String STATE_LIST = "State Adapter Data";
     private static final String STATE_LIST_2 = "State Adapter Data";
@@ -96,7 +100,7 @@ public class NewsFragment extends FragmentBase implements Constants, SwipeRefres
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_news, container, false);
 
         mItemsContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.container_items);
@@ -351,7 +355,17 @@ public class NewsFragment extends FragmentBase implements Constants, SwipeRefres
 
                                             Item item = new Item(itemObj);
 
-                                            itemsList.add(item);
+                                            if (item.getImgUrl().length() != 0 && isShowPhoto) {
+                                                itemsList.add(item);
+                                            } else
+                                            if(item.getVideoUrl() != null && item.getVideoUrl().length() != 0 && isShowVideo){
+                                                itemsList.add(item);
+                                            } else
+                                            if (item.getYouTubeVideoUrl() != null && item.getYouTubeVideoUrl().length() != 0 && isShowVideo) {
+                                                itemsList.add(item);
+                                            } else if(isShowText) {
+                                                itemsList.add(item);
+                                            }
 
                                             // Spotlight after first item
                                             /*if (i == SPOTLIGHT_AFTER_ITEM_NUMBER && App.getInstance().getSettings().getAllowSpotlight() == ENABLED && itemsAdapter.getItemCount() <= LIST_ITEMS) {
@@ -361,7 +375,7 @@ public class NewsFragment extends FragmentBase implements Constants, SwipeRefres
                                                 spotlight.setSpotlight(1);
 
                                                 itemsList.add(spotlight);
-                                            }*/
+                                            }
 
                                             // Ad after first item
                                             if (i == MY_AD_AFTER_ITEM_NUMBER && App.getInstance().getAdmobUpgrade() == DISABLED) {
@@ -374,7 +388,7 @@ public class NewsFragment extends FragmentBase implements Constants, SwipeRefres
 
                                                     itemsList.add(ad);
                                                 }
-                                            }
+                                            }*/
                                         }
                                     }
                                 }
@@ -518,5 +532,83 @@ public class NewsFragment extends FragmentBase implements Constants, SwipeRefres
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    private void setTitle(int titleId){
+        MainActivity activity = (MainActivity)getActivity();
+        if(activity != null) {
+            if(activity.getSupportActionBar() != null)
+                activity.getSupportActionBar().setTitle(titleId);
+        }
+
+    }
+
+    private void showPhoto(){
+        isShowPhoto = true;
+        isShowText = false;
+        isShowVideo = false;
+        setTitle(R.string.photo_title);
+        onRefresh();
+    }
+    private void showVideo(){
+        isShowPhoto = false;
+        isShowText = false;
+        isShowVideo = true;
+        setTitle(R.string.video_title);
+        onRefresh();
+    }
+    private void showAll(){
+        isShowPhoto = true;
+        isShowText = true;
+        isShowVideo = true;
+        setTitle(R.string.nav_feed);
+        onRefresh();
+    }
+    private void loadPhoto(){
+        Intent i = getActivity().getIntent();
+
+        Long profile_id = i.getLongExtra("profileId", 0);
+        String profile_mention = i.getStringExtra("profileMention");
+
+        if (App.getInstance().getId() != profile_id) {
+
+            App.getInstance().setCurrentProfileId(profile_id);
+        }
+
+        if (profile_id == 0 && (profile_mention == null || profile_mention.length() == 0)) {
+
+            profile_id = App.getInstance().getId();
+
+        }
+
+        Intent intent = new Intent(getActivity(), GalleryActivity.class);
+        intent.putExtra("profileId", profile_id);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.stream:
+                showAll();
+                break;
+            case R.id.photo:
+                showPhoto();
+                break;
+            case R.id.video:
+                showVideo();
+                break;
+            case R.id.load_photo:
+                loadPhoto();
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClickMenuItem(MenuItem item) {
+        onOptionsItemSelected(item);
     }
 }

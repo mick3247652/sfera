@@ -270,7 +270,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
             holder.mSpotlightMoreBtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override
-                public void onClick(View v) {
+                public void onClickMenuItem(View v) {
 
                     Intent intent = new Intent(context, SpotlightActivity.class);
                     ((Activity) context).startActivityForResult(intent, ACTION_SPOTLIGHT);
@@ -303,6 +303,8 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
     public void onBindItem(ViewHolder holder, final int position) {
 
         final Item p = items.get(position);
+
+
 
         holder.mLinkContainer.setVisibility(View.GONE);
 
@@ -368,7 +370,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
         }
 
         if (p.getImgUrl().length() != 0){
-
+//photo
             holder.mItemImg.setVisibility(View.VISIBLE);
             holder.mProgressBar.setVisibility(View.VISIBLE);
 
@@ -398,6 +400,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
         } else {
 
             if (p.getVideoUrl() != null && p.getVideoUrl().length() != 0) {
+                //video
 
                 holder.mItemImg.setVisibility(View.VISIBLE);
                 holder.mProgressBar.setVisibility(View.VISIBLE);
@@ -427,7 +430,7 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
                         });
 
             } else if (p.getYouTubeVideoUrl() != null && p.getYouTubeVideoUrl().length() != 0) {
-
+//youtube
                 holder.mItemImg.setVisibility(View.VISIBLE);
                 holder.mProgressBar.setVisibility(View.VISIBLE);
 
@@ -454,6 +457,9 @@ public class AdvancedItemListAdapter extends RecyclerView.Adapter<AdvancedItemLi
 
             } else {
 
+                //holder.itemView.setVisibility(View.GONE);
+                //holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+                //holder.itemView.setVisibility(View.GONE);
                 holder.mItemImg.setVisibility(View.GONE);
             }
         }

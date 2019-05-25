@@ -354,7 +354,7 @@ public class EmojiconsPopup extends PopupWindow implements ViewPager.OnPageChang
 	 * click is fired immediately, next before initialInterval, and subsequent before
 	 * normalInterval.
 	 * <p/>
-	 * <p>Interval is scheduled before the onClick completes, so it has to run fast.
+	 * <p>Interval is scheduled before the onClickMenuItem completes, so it has to run fast.
 	 * If it runs slow, it does not generate skipped onClicks.
 	 */
 	public static class RepeatListener implements View.OnTouchListener {
