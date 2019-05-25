@@ -547,6 +547,6 @@
     <string name="video_title">Видео \u25bd</string>
     <string name="photo_title_menu">Фотографии</string>
     <string name="video_title_menu">Видео</string>
-    <string name="load_profile_photo">Загрузить свои</string>
+    <string name="load_profile_photo">Загрузить</string>
 
 </resources>
