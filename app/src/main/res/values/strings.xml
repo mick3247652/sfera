@@ -311,8 +311,10 @@
     <string name="page_7">Сообщения</string>
     <string name="page_8">Профиль</string>
 
-    <string name="nav_feed">Стена</string>
-    <string name="nav_stream">Лента</string>
+    <string name="nav_feed">Стена \u25bd</string>
+    <string name="nav_stream">Лента \u25bd</string>
+    <string name="nav_feed_menu">Стена</string>
+    <string name="nav_stream_menu">Лента</string>
     <string name="nav_categories">Разделы</string>
     <string name="nav_search">Поиск</string>
     <string name="nav_nearby">Рядом с вами</string>
@@ -540,5 +542,11 @@
     <string name="msg_success_enable_guests">My Guests function activated!</string>
 
     <string name="refresh_button_title">\u2191 Обновить</string>
+    <string name="menu_title">Все сообщения</string>
+    <string name="photo_title">Фотографии \u25bd</string>
+    <string name="video_title">Видео \u25bd</string>
+    <string name="photo_title_menu">Фотографии</string>
+    <string name="video_title_menu">Видео</string>
+    <string name="load_profile_photo">Загрузить свои</string>
 
 </resources>

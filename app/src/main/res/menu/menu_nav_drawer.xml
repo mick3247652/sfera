@@ -8,11 +8,11 @@
         <item
             android:id="@+id/nav_stream"
             android:icon="@drawable/ic_action_stream"
-            android:title="@string/nav_stream" />
+            android:title="@string/nav_stream_menu" />
         <item
             android:id="@+id/nav_feed"
             android:icon="@drawable/ic_action_feed"
-            android:title="@string/nav_feed" />
+            android:title="@string/nav_feed_menu" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_action_profile"
