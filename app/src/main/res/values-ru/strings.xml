@@ -3,7 +3,7 @@
     <!-- Edit the following data -->
 
     <string name="app_name">СФЕРА</string>
-    <string name="app_version">1.5</string>
+    <string name="app_version">1.7</string>
     <string name="app_year">2019</string>
     <string name="app_copyright">sfera.press</string>
     <string name="app_email">support@sfera.press</string>
@@ -548,5 +548,8 @@
     <string name="photo_title_menu">Фотографии</string>
     <string name="video_title_menu">Видео</string>
     <string name="load_profile_photo">Загрузить</string>
+
+    <string name="action_view">View</string>
+    <string name="msg_profile_link_copied">Ссылка профиля, скопирована в буфер обмена</string>
 
 </resources>

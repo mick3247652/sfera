@@ -8,8 +8,8 @@ android {
         applicationId "ru.club.sfera"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 6
-        versionName '1.5'
+        versionCode 8
+        versionName '1.7'
 
     }
     buildTypes {
