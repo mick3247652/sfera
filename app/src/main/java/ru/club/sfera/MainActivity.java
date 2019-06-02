@@ -78,7 +78,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
         } else {
 
-            fragment = new StreamFragment();
+            fragment = new FeedFragment();
 
             restore = false;
             mTitle = getString(R.string.app_name);
@@ -149,7 +149,8 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
             // Show default section "Explore"
 
-            displayFragment(mNavMenu.findItem(R.id.nav_stream).getItemId(), mNavMenu.findItem(R.id.nav_stream).getTitle().toString());
+            //displayFragment(mNavMenu.findItem(R.id.nav_stream).getItemId(), mNavMenu.findItem(R.id.nav_stream).getTitle().toString());
+            displayFragment(mNavMenu.findItem(R.id.nav_feed).getItemId(), mNavMenu.findItem(R.id.nav_feed).getTitle().toString());
         }
     }
 
@@ -265,6 +266,29 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
         if(stream_menu != null) stream_menu.setTitle(textId);
     }
 
+
+    private void loadPhoto(){
+        Intent i = getIntent();
+
+        Long profile_id = i.getLongExtra("profileId", 0);
+        String profile_mention = i.getStringExtra("profileMention");
+
+        if (App.getInstance().getId() != profile_id) {
+
+            App.getInstance().setCurrentProfileId(profile_id);
+        }
+
+        if (profile_id == 0 && (profile_mention == null || profile_mention.length() == 0)) {
+
+            profile_id = App.getInstance().getId();
+
+        }
+
+        Intent intent = new Intent(this, GalleryActivity.class);
+        intent.putExtra("profileId", profile_id);
+        startActivity(intent);
+    }
+
     private void displayFragment(int id, String title) {
 
         action = false;
@@ -285,7 +309,13 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 break;
             }
 
-            case R.id.nav_stream: {
+            case R.id.nav_gallery: {
+                mNavView.setCheckedItem(R.id.nav_feed);
+                loadPhoto();
+                break;
+            }
+
+            /*case R.id.nav_stream: {
 //лента
                 page = PAGE_STREAM;
 
@@ -300,7 +330,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 //setTitleMenu(R.string.nav_stream);
 
                 break;
-            }
+            }*/
 
             case R.id.nav_search: {
 

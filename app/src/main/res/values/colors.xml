@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_bg">#0F4671</color>
+    <color name="app_bg">#1973bb</color>
     <color name="white">#ffffff</color>
     <color name="actionbar_bg">#55ACEE</color>
-    <color name="actionbar_top_bg">#1C6399</color>
+    <color name="actionbar_top_bg">#2090ea</color>
     <color name="gray">#808285</color>
     <color name="black">#000000</color>
     <color name="answer_text">#ff222222</color>
@@ -11,13 +11,13 @@
     <color name="signup_button_text">#3D678C</color>
     <color name="gray_text">#757575</color>
     <color name="light_gray">#ffd9d9d9</color>
-    <color name="dark_blue">#204062</color>
+    <color name="dark_blue">#1973bb</color>
     <color name="light_blue">#34B5E5</color>
     <color name="gray_border">#D3D3D3</color>
     <color name="content_page">#F2F2F2</color>
     <color name="avatar_border">#F2F2F2</color>
     <color name="gray_button_text_color">#288EC1</color>
-    <color name="toolBar">#204062</color>
+    <color name="toolBar">#1973bb</color>
     <color name="hashTag">#5BCFF2</color>
     <color name="green">#1ebe1b</color>
     <color name="sponsored">#FF8500</color>

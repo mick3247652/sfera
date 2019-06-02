@@ -4,15 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group
-        android:checkableBehavior="single">
-        <item
+        android:checkableBehavior="none">
+        <!--<item
             android:id="@+id/nav_stream"
             android:icon="@drawable/ic_action_stream"
-            android:title="@string/nav_stream_menu" />
+            android:title="@string/nav_stream_menu"
+            android:visible="false" />-->
         <item
             android:id="@+id/nav_feed"
             android:icon="@drawable/ic_action_feed"
             android:title="@string/nav_feed_menu" />
+
+        <item
+
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_action_gallery"
+            android:title="@string/title_activity_gallery" />
 
         <item
             android:id="@+id/nav_profile"
