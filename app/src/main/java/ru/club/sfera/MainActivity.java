@@ -78,7 +78,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
         } else {
 
-            fragment = new FeedFragment();
+            fragment = new StreamFragment();
 
             restore = false;
             mTitle = getString(R.string.app_name);
@@ -149,8 +149,8 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
 
             // Show default section "Explore"
 
-            //displayFragment(mNavMenu.findItem(R.id.nav_stream).getItemId(), mNavMenu.findItem(R.id.nav_stream).getTitle().toString());
-            displayFragment(mNavMenu.findItem(R.id.nav_feed).getItemId(), mNavMenu.findItem(R.id.nav_feed).getTitle().toString());
+            displayFragment(mNavMenu.findItem(R.id.nav_stream).getItemId(), mNavMenu.findItem(R.id.nav_stream).getTitle().toString());
+            //displayFragment(mNavMenu.findItem(R.id.nav_feed).getItemId(), mNavMenu.findItem(R.id.nav_feed).getTitle().toString());
         }
     }
 
@@ -315,7 +315,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 break;
             }
 
-            /*case R.id.nav_stream: {
+            case R.id.nav_stream: {
 //лента
                 page = PAGE_STREAM;
 
@@ -330,7 +330,7 @@ public class MainActivity extends ActivityBase implements ImageChooseDialog.Aler
                 //setTitleMenu(R.string.nav_stream);
 
                 break;
-            }*/
+            }
 
             case R.id.nav_search: {
 
