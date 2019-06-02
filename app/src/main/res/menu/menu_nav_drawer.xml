@@ -9,7 +9,7 @@
             android:id="@+id/nav_stream"
             android:icon="@drawable/ic_action_stream"
             android:title="@string/nav_stream_menu"
-            android:visible="false" />
+            />
         <item
             android:id="@+id/nav_feed"
             android:icon="@drawable/ic_action_feed"
