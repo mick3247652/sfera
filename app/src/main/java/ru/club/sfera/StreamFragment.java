@@ -389,7 +389,7 @@ public class StreamFragment extends FragmentBase implements Constants, SwipeRefr
 
                                             item.setAd(0);
 
-                                            if (item.getImgUrl().length() != 0 && isShowPhoto) {
+                                            if (item.getImgUrl() != null && item.getImgUrl().length() != 0 && isShowPhoto) {
                                                 itemsList.add(item);
                                             } else
                                             if(item.getVideoUrl() != null && item.getVideoUrl().length() != 0 && isShowVideo){
